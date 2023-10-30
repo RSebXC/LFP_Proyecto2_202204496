@@ -1,4 +1,4 @@
-**Manual de Usuario para el Analizador Léxico y Sintáctico**
+#Manual de Usuario para el Analizador Léxico y Sintáctico
 
 ---
 

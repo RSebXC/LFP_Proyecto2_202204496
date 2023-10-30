@@ -127,7 +127,47 @@ def instruccion(cadena):
             lista_lexemas.append(l)
             n_columna += 1
             puntero = 0
+
+        elif cadena.startswith("suma"):
+            lexema, cadena = armar_lexema(cadena)
+            if lexema and cadena:
+                n_columna += 1
+                l = Lexema(lexema, n_linea, n_columna, 'SUMA')
+                lista_lexemas.append(l)
+                n_columna += len(lexema) + 1
+                puntero = 0
+            l = Lexema('(', n_linea, n_columna, 'PARIZQ')
+            lista_lexemas.append(l)
+            n_columna += 1
+            puntero = 0
+
+        elif cadena.startswith("max"):
+            lexema, cadena = armar_lexema(cadena)
+            if lexema and cadena:
+                n_columna += 1
+                l = Lexema(lexema, n_linea, n_columna, 'MAX')
+                lista_lexemas.append(l)
+                n_columna += len(lexema) + 1
+                puntero = 0
+            l = Lexema('(', n_linea, n_columna, 'PARIZQ')
+            lista_lexemas.append(l)
+            n_columna += 1
+            puntero = 0
                 
+
+        elif cadena.startswith("min"):
+            lexema, cadena = armar_lexema(cadena)
+            if lexema and cadena:
+                n_columna += 1
+                l = Lexema(lexema, n_linea, n_columna, 'MIN')
+                lista_lexemas.append(l)
+                n_columna += len(lexema) + 1
+                puntero = 0
+            l = Lexema('(', n_linea, n_columna, 'PARIZQ')
+            lista_lexemas.append(l)
+            n_columna += 1
+            puntero = 0
+
         elif cadena.startswith("contarsi"):
             lexema, cadena = armar_lexema(cadena)  # Considerando que "contarsi" es una palabra reservada
             if lexema and cadena:

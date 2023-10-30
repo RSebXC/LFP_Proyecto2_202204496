@@ -12,6 +12,7 @@ class Registros(Expression):
 
     def ejecutarT(self):
         return self.elementos
+            
 
     def getFila(self):
         return super().getFila()
