@@ -130,7 +130,7 @@ def instrucciones_sintactico(lista_lexemas):
                         if parentesis.operar(None) == ')':
                             punto_coma = lista_lexemas.pop(0)
                             if punto_coma.operar(None) == ';':
-                                return ImprimirLn(texto.lexema + "\n", lexema.getFila(), lexema.getColumna())
+                                return ImprimirLn( '\n' +texto.lexema , lexema.getFila(), lexema.getColumna())
 
 
         elif lexema.operar(None) == 'comentario':
@@ -173,7 +173,7 @@ def instrucciones_sintactico(lista_lexemas):
                     campo_nombre = campo.lexema
                     print("despues de las comillas")
                     # Verificar si el campo existe en los registros y calcular el promedio
-                    return Promedio(campo_nombre," ", campo.getFila(), campo.getColumna())
+                    return Promedio(campo_nombre," ",None, campo.getFila(), campo.getColumna())
                 else:
                     # Error: Falta paréntesis derecho
                     lista_errores.append(Errores(parentesis_der.lexema, "Sintáctico", parentesis_der.getFila(), parentesis_der.getColumna()))
@@ -183,29 +183,20 @@ def instrucciones_sintactico(lista_lexemas):
 
         elif lexema.operar(None) == 'suma':
             parentesis_izq = lista_lexemas.pop(0)
+            print(parentesis_izq.operar(None))
             if parentesis_izq.operar(None) == '(':
+                print("primer parentesis")
+               
+                lista_lexemas.pop(0)
                 campo = lista_lexemas.pop(0)
+                lista_lexemas.pop(0)
                 parentesis_der = lista_lexemas.pop(0)
                 if parentesis_der.operar(None) == ')':
-                    campo_nombre = campo.lexema.strip('"')
+                    
+                    campo_nombre = campo.lexema
+                    print("despues de las comillas")
                     # Verificar si el campo existe en los registros y calcular el promedio
-                    if campo_nombre in registros[0]:  # Suponiendo que el primer registro tiene todas las claves posibles
-                        suma_campos = 0
-                        contador_registros = 0
-                        for registro in registros:
-                            if campo_nombre in registro and isinstance(registro[campo_nombre], (int, float)):
-                                suma_campos += registro[campo_nombre]
-                                contador_registros += 1
-
-                        if contador_registros > 0:
-                            suma = suma_campos
-                            return Suma(str(suma), lexema.getFila(), lexema.getColumna())
-                        else:
-                            # No se encontraron registros válidos para calcular el promedio
-                            lista_errores.append(Errores(f"No se encontraron registros válidos para el campo '{campo_nombre}'", "Semántico", campo.getFila(), campo.getColumna()))
-                    else:
-                        # Error: Campo no existe en los registros
-                        lista_errores.append(Errores(f"Campo '{campo_nombre}' no existe en los registros", "Semántico", campo.getFila(), campo.getColumna()))
+                    return Suma(campo_nombre," ",None, campo.getFila(), campo.getColumna())
                 else:
                     # Error: Falta paréntesis derecho
                     lista_errores.append(Errores(parentesis_der.lexema, "Sintáctico", parentesis_der.getFila(), parentesis_der.getColumna()))
@@ -216,27 +207,20 @@ def instrucciones_sintactico(lista_lexemas):
 
         elif lexema.operar(None) == 'max':
             parentesis_izq = lista_lexemas.pop(0)
+            print(parentesis_izq.operar(None))
             if parentesis_izq.operar(None) == '(':
+                print("primer parentesis")
+               
+                lista_lexemas.pop(0)
                 campo = lista_lexemas.pop(0)
+                lista_lexemas.pop(0)
                 parentesis_der = lista_lexemas.pop(0)
                 if parentesis_der.operar(None) == ')':
-                    campo_nombre = campo.lexema.strip('"')
-                    # Verificar si el campo existe en los registros y encontrar el máximo
-                    if campo_nombre in registros[0]:  # Suponiendo que el primer registro tiene todas las claves posibles
-                        max_valor = None
-                        for registro in registros:
-                            if campo_nombre in registro and isinstance(registro[campo_nombre], (int, float)):
-                                if max_valor is None or registro[campo_nombre] > max_valor:
-                                    max_valor = registro[campo_nombre]
-                        
-                        if max_valor is not None:
-                            return Max(str(max_valor), lexema.getFila(), lexema.getColumna())
-                        else:
-                            # No se encontraron registros válidos para calcular el máximo
-                            lista_errores.append(Errores(f"No se encontraron registros válidos para el campo '{campo_nombre}'", "Semántico", campo.getFila(), campo.getColumna()))
-                    else:
-                        # Error: Campo no existe en los registros
-                        lista_errores.append(Errores(f"Campo '{campo_nombre}' no existe en los registros", "Semántico", campo.getFila(), campo.getColumna()))
+                    
+                    campo_nombre = campo.lexema
+                    print("despues de las comillas")
+                    # Verificar si el campo existe en los registros y calcular el promedio
+                    return Max(campo_nombre," ",None, campo.getFila(), campo.getColumna())
                 else:
                     # Error: Falta paréntesis derecho
                     lista_errores.append(Errores(parentesis_der.lexema, "Sintáctico", parentesis_der.getFila(), parentesis_der.getColumna()))
@@ -246,27 +230,20 @@ def instrucciones_sintactico(lista_lexemas):
 
         elif lexema.operar(None) == 'min':
             parentesis_izq = lista_lexemas.pop(0)
+            print(parentesis_izq.operar(None))
             if parentesis_izq.operar(None) == '(':
+                print("primer parentesis")
+               
+                lista_lexemas.pop(0)
                 campo = lista_lexemas.pop(0)
+                lista_lexemas.pop(0)
                 parentesis_der = lista_lexemas.pop(0)
                 if parentesis_der.operar(None) == ')':
-                    campo_nombre = campo.lexema.strip('"')
-                    # Verificar si el campo existe en los registros y encontrar el mínimo
-                    if campo_nombre in registros[0]:  # Suponiendo que el primer registro tiene todas las claves posibles
-                        min_valor = None
-                        for registro in registros:
-                            if campo_nombre in registro and isinstance(registro[campo_nombre], (int, float)):
-                                if min_valor is None or registro[campo_nombre] < min_valor:
-                                    min_valor = registro[campo_nombre]
-                        
-                        if min_valor is not None:
-                            return Min(str(min_valor), lexema.getFila(), lexema.getColumna())
-                        else:
-                            # No se encontraron registros válidos para calcular el mínimo
-                            lista_errores.append(Errores(f"No se encontraron registros válidos para el campo '{campo_nombre}'", "Semántico", campo.getFila(), campo.getColumna()))
-                    else:
-                        # Error: Campo no existe en los registros
-                        lista_errores.append(Errores(f"Campo '{campo_nombre}' no existe en los registros", "Semántico", campo.getFila(), campo.getColumna()))
+                    
+                    campo_nombre = campo.lexema
+                    print("despues de las comillas")
+                    # Verificar si el campo existe en los registros y calcular el promedio
+                    return Min(campo_nombre," ",None, campo.getFila(), campo.getColumna())
                 else:
                     # Error: Falta paréntesis derecho
                     lista_errores.append(Errores(parentesis_der.lexema, "Sintáctico", parentesis_der.getFila(), parentesis_der.getColumna()))
@@ -274,7 +251,6 @@ def instrucciones_sintactico(lista_lexemas):
                 # Error: Falta paréntesis izquierdo
                 lista_errores.append(Errores(parentesis_izq.lexema, "Sintáctico", parentesis_izq.getFila(), parentesis_izq.getColumna()))
 
-        
         elif lexema.operar(None) == 'contarsi':
             parentesis_izq = lista_lexemas.pop(0)
             if parentesis_izq.operar(None) == '(':

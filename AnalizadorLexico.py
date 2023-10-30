@@ -34,7 +34,7 @@ def instruccion(cadena):
     global lista_lexemas
     lexema = ''
     puntero = 0
-    palabras_reservadas = ['Claves', 'imprimir','Registros','imprimirln','conteo','promedio','contarsi','datos']
+    palabras_reservadas = ['Claves', 'imprimir','Registros','imprimirln','conteo','promedio','contarsi','datos','suma','max','min']
     while cadena:
         char = cadena[puntero]
         puntero += 1

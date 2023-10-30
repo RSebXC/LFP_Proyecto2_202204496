@@ -24,7 +24,7 @@ class Datos(Expression):
             
             registros_str += str(info.ejecutarT()[0]) + " " + str(info.ejecutarT()[1]) + " " + str(info.ejecutarT()[2]) + " " + str(info.ejecutarT()[3]) + " " + str(info.ejecutarT()[4]) + "\n "
         
-        clave_str = " ".join(self.clave[0])
+        clave_str = " ".join(self.clave)
         
         return "\n"+ clave_str + " \n" + registros_str
 

@@ -113,8 +113,9 @@ class InterfazGrafica:
             ele = []
             for elemento in lista_instrucciones:
                 if isinstance(elemento, DeclaracionClaves):
-                    abc = elemento.ejecutarT()
-                    ele.append(abc)
+                    ele = elemento.ejecutarT()
+
+                    
                 elif isinstance(elemento, Imprimir):
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, ImprimirLn):
@@ -133,6 +134,7 @@ class InterfazGrafica:
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Promedio):
                     elemento.setTexto(ele)
+                    elemento.setRes(datos)
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Contarsi):
                     imprimir_consola += elemento.ejecutarT()
@@ -141,10 +143,16 @@ class InterfazGrafica:
                     elemento.serClaves(ele)
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Suma):
+                    elemento.setTexto(ele)
+                    elemento.setRes(datos)
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Min):
+                    elemento.setTexto(ele)
+                    elemento.setRes(datos)
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Max):
+                    elemento.setTexto(ele)
+                    elemento.setRes(datos)
                     imprimir_consola += elemento.ejecutarT()
                 elif isinstance(elemento, Reporte):
                     elemento.serRegistros(datos)
